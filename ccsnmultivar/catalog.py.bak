@@ -75,7 +75,7 @@ class Catalog(object):
         freq_bin_lower = 40
         fs = self._metadata['fs']
         Y_transformed = {}
-        for key in list(self.Y_dict.keys()):
+        for key in self.Y_dict.keys():
             # normalize by fs, bins have units strain/Hz
             fs = self._metadata["fs"]
             Y_transformed[key] = (1./fs)*np.fft.fft(self.Y_dict[key])[freq_bin_lower:freq_bin_upper]
@@ -89,13 +89,13 @@ class Catalog(object):
         self.sigma = convert_psd_to_sigma(self.psd, dF)
 
     def _spectogram(self):
-        print("not implemented yet")
+        print "not implemented yet"
 
     def _amplitude(self):
-        print("not implemented yet") 
+        print "not implemented yet" 
 
     def _phase(self):
-        print("not implemented yet") 
+        print "not implemented yet" 
 
     def mcmc_hook(self):
         dF = self._metadata["dF"]
@@ -141,7 +141,7 @@ def resample_waveforms(Y_dict):
 
     """
     # right now, Y_dict, using my ccsnmultivar github waveform sets
-    for key in list(Y_dict.keys()):
+    for key in Y_dict.keys():
         Y_dict[key] = signal.decimate(Y_dict[key], 4, ftype='fir')
     metadata = {}
     metadata["fs"] = 4096. # in Hz
@@ -168,7 +168,7 @@ def load_waveforms_from_file(path_to_waveforms):
     wave_list = [x for x in wave_list if x != []]
     Y_dict = {}
     for i in np.arange(0,len(wave_list)):
-        Y_dict[wave_list[i][0]] = list(map(np.float, wave_list[i][1:]))
+        Y_dict[wave_list[i][0]] = map(np.float, wave_list[i][1:])
     return Y_dict
 
 

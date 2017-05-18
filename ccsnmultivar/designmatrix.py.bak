@@ -15,7 +15,7 @@ class DesignMatrix(object):
 
     def get_metadata(self):
         # return column names, row names, formula
-        print("not done yet")
+        print "not done yet"
 
     def get_rownames(self):
         return self._row_names
@@ -133,7 +133,7 @@ class DesignMatrix(object):
                 # store dictionary of encoder functions to keep for prediction
                 encoder_dict[key] = polynomial_encoder
             else:
-                print(encoding)
+                print encoding
                 raise Exception("Encoding name error")
         # now compute interaction designmatrices
         for interaction in inter_list:
@@ -224,7 +224,7 @@ class DesignMatrix(object):
         # now do interactions
         inter_list = self._inter_list
         for interaction in inter_list:
-            if 'twoway' in list(encoder_dict.keys()):
+            if 'twoway' in encoder_dict.keys():
                 encoder = encoder_dict['twoway']
                 param_name1 = interaction[0]
                 param_name2 = interaction[1]
@@ -237,7 +237,7 @@ class DesignMatrix(object):
                 for i in np.arange(0,len(names)):
                     Xbycol_dict[names[i]] = X_int[:,i]
 
-            if 'threeway' in list(encoder_dict.keys()):
+            if 'threeway' in encoder_dict.keys():
                 encoder = encoder_dict['threeway']
                 param_name1 = interaction[0]
                 param_name2 = interaction[1]
@@ -254,7 +254,7 @@ class DesignMatrix(object):
 
         # remove columns that were trimmed (if any)
         trimmed_columns = encoder_dict['trimmed_columns']
-        full_columns = list(Xbycol_dict.keys())
+        full_columns = Xbycol_dict.keys()
         used_columns = [x for x in full_columns if x not in trimmed_columns]
         # make design matrix array
         X = []
@@ -442,7 +442,7 @@ def _dum_encode(param_dict,drop_name,param_name):
 
 
 def _poly_encode(param_dict,degree,param_name):
-    x = np.array(list(map(float,param_dict[param_name])))
+    x = np.array(map(float,param_dict[param_name]))
     degree = int(degree)
     if len(np.unique(x)) < 5:
         warning.warn("Not many unique values of parameter %s for Poly encoding" & param_name)
@@ -454,7 +454,7 @@ def _poly_encode(param_dict,degree,param_name):
     def polynomial_encoder(param_name, new_values):  
         # generate chebyshev polynomials
         x = new_values
-        x = np.array(list(map(float, x)))
+        x = np.array(map(float, x))
         # check if new_values are outside the range of the originals
         if (max(x) > max_x) or (min(x) < min_x):
             raise ValueError("Cannot extrapolate outside original parameter range")          
@@ -480,4 +480,4 @@ def _poly_encode(param_dict,degree,param_name):
     return polynomial_encoder, X, col_names
 
 def _bs_encode(param_dict,bsplineparameters, param_name):
-    print("not implemented yet")
+    print "not implemented yet"

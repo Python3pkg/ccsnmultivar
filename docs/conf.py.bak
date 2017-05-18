@@ -63,8 +63,8 @@ source_suffix = '.rst'
 master_doc = 'README.md'
 
 # General information about the project.
-project = 'ccsnmultivar'
-copyright = '2014, Bill Engels'
+project = u'ccsnmultivar'
+copyright = u'2014, Bill Engels'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -216,8 +216,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'ccsnmultivar.tex', 'ccsnmultivar Documentation',
-   'Bill Engels', 'manual'),
+  ('index', 'ccsnmultivar.tex', u'ccsnmultivar Documentation',
+   u'Bill Engels', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -246,8 +246,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'ccsnmultivar', 'ccsnmultivar Documentation',
-     ['Bill Engels'], 1)
+    ('index', 'ccsnmultivar', u'ccsnmultivar Documentation',
+     [u'Bill Engels'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -260,8 +260,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'ccsnmultivar', 'ccsnmultivar Documentation',
-   'Bill Engels', 'ccsnmultivar', 'One line description of project.',
+  ('index', 'ccsnmultivar', u'ccsnmultivar Documentation',
+   u'Bill Engels', 'ccsnmultivar', 'One line description of project.',
    'Miscellaneous'),
 ]
 

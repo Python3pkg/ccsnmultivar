@@ -4,7 +4,7 @@ import scipy.stats as stats
 import re as re
 import csv as csv
 from tabulate import tabulate
-from . import GWUtils
+import GWUtils
 
 
 class Multivar(object):
@@ -55,12 +55,12 @@ class Multivar(object):
         row_names = self._designmatrix_object.get_rownames()
         # make sure waveforms are matched
         # loop through Xrow_names, use as key for Y_dict, populate Y_matrix
-        Y = np.empty((len(row_names),len(Y_dict[list(Y_dict.keys())[0]])))
+        Y = np.empty((len(row_names),len(Y_dict[Y_dict.keys()[0]])))
 
         # check if waveforms are complex valued.  if so, instantiate Y as complex type
-        if sum(np.iscomplex(Y_dict[list(Y_dict.keys())[0]])):
+        if sum(np.iscomplex(Y_dict[Y_dict.keys()[0]])):
             # then it is complex
-            Y = np.empty((len(row_names),len(Y_dict[list(Y_dict.keys())[0]]))).astype(np.complex)
+            Y = np.empty((len(row_names),len(Y_dict[Y_dict.keys()[0]]))).astype(np.complex)
 
         for i in np.arange(0,len(row_names)):
             Y[i,:] = Y_dict[row_names[i]]
@@ -206,18 +206,18 @@ class Multivar(object):
                 raise ValueError("degrees of freedom <= 0, Hotellings T2 not defined")
 
             # print catalog and basis info
-            cat_table = list(self._catalog_object.get_params().items())
-            bas_table = list(self._basis_object.get_params().items())
-            print(tabulate(cat_table+bas_table,tablefmt='plain'))
+            cat_table = self._catalog_object.get_params().items()
+            bas_table = self._basis_object.get_params().items()
+            print tabulate(cat_table+bas_table,tablefmt='plain')
 
             # then print pvalues
             # make T^2 & pvalue table
             headers = self._results[0]
             table   = self._results[1:]
-            print(tabulate(table, headers, tablefmt="rst"))
-            print("Formula Used: %s" % self._designmatrix_object._formula)
-            print("Degrees of Freedom (n - p - k): %s" % str(total_dof))
-            print("Condition Number of X^T*X: %.2f" % np.linalg.cond(np.dot(self._X.T, self._X)))
+            print tabulate(table, headers, tablefmt="rst")
+            print "Formula Used: %s" % self._designmatrix_object._formula
+            print "Degrees of Freedom (n - p - k): %s" % str(total_dof)
+            print "Condition Number of X^T*X: %.2f" % np.linalg.cond(np.dot(self._X.T, self._X))
 
     def reconstruct(self):
         """ return reconstructed waveforms fit by the multivar object"""
@@ -240,7 +240,7 @@ class Multivar(object):
                  ["Max: ",np.max(olaps)]]
 
         header = ["Percentile","Overlap"]
-        print(tabulate(table,header,tablefmt="rst"))
+        print tabulate(table,header,tablefmt="rst")
 
     def compute_overlaps(self, *args):
         """ compute overlaps """
